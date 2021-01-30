@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DRIP1234Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ExponatSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MigratSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="RoomId" Type="int" Nullable="false" />
+    <Property Name="ExponatId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ExponatMigrat">
+    <End Role="ExponatSet" Type="Self.ExponatSet" Multiplicity="1" />
+    <End Role="MigratSet" Type="Self.MigratSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExponatSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MigratSet">
+        <PropertyRef Name="ExponatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomMigrat">
+    <End Role="RoomSet" Type="Self.RoomSet" Multiplicity="1" />
+    <End Role="MigratSet" Type="Self.MigratSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MigratSet">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище DRIP1234ModelContainer">
+    <EntitySet Name="ExponatSet" EntityType="Self.ExponatSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MigratSet" EntityType="Self.MigratSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomSet" EntityType="Self.RoomSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ExponatMigrat" Association="Self.FK_ExponatMigrat">
+      <End Role="ExponatSet" EntitySet="ExponatSet" />
+      <End Role="MigratSet" EntitySet="MigratSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomMigrat" Association="Self.FK_RoomMigrat">
+      <End Role="RoomSet" EntitySet="RoomSet" />
+      <End Role="MigratSet" EntitySet="MigratSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

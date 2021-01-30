@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DRIP1234Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ExponatSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MigratSet" Relationship="Self.FK_ExponatMigrat" FromRole="ExponatSet" ToRole="MigratSet" />
+  </EntityType>
+  <EntityType Name="MigratSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <Property Name="ExponatId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ExponatSet" Relationship="Self.FK_ExponatMigrat" FromRole="MigratSet" ToRole="ExponatSet" />
+    <NavigationProperty Name="RoomSet" Relationship="Self.FK_RoomMigrat" FromRole="MigratSet" ToRole="RoomSet" />
+  </EntityType>
+  <EntityType Name="RoomSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MigratSet" Relationship="Self.FK_RoomMigrat" FromRole="RoomSet" ToRole="MigratSet" />
+  </EntityType>
+  <Association Name="FK_ExponatMigrat">
+    <End Role="ExponatSet" Type="Self.ExponatSet" Multiplicity="1" />
+    <End Role="MigratSet" Type="Self.MigratSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExponatSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MigratSet">
+        <PropertyRef Name="ExponatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomMigrat">
+    <End Role="RoomSet" Type="Self.RoomSet" Multiplicity="1" />
+    <End Role="MigratSet" Type="Self.MigratSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MigratSet">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DRIP1234Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ExponatSet" EntityType="Self.ExponatSet" />
+    <EntitySet Name="MigratSet" EntityType="Self.MigratSet" />
+    <EntitySet Name="RoomSet" EntityType="Self.RoomSet" />
+    <AssociationSet Name="FK_ExponatMigrat" Association="Self.FK_ExponatMigrat">
+      <End Role="ExponatSet" EntitySet="ExponatSet" />
+      <End Role="MigratSet" EntitySet="MigratSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomMigrat" Association="Self.FK_RoomMigrat">
+      <End Role="RoomSet" EntitySet="RoomSet" />
+      <End Role="MigratSet" EntitySet="MigratSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

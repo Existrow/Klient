@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AddExponat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddExponatResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddRoom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddRoomResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddMigrat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="exponat" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="room" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMigratResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DelExponat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelExponatResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DelRoom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelRoomResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DelMigrat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelMigratResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetExponats">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetExponatsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExponatsResult" type="tns:ArrayOfExponat" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfExponat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Exponat" nillable="true" type="tns:Exponat" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Exponat">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Migrat" type="tns:ArrayOfMigrat" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMigrat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Migrat" nillable="true" type="tns:Migrat" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Migrat">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RoomId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExponatId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date1" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Room" type="tns:Room" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exponat" type="tns:Exponat" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Room">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Migrat" type="tns:ArrayOfMigrat" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRooms">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRoomsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRoomsResult" type="tns:ArrayOfRoom" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRoom">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMigrats">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMigratsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMigratsResult" type="tns:ArrayOfMigrat" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Auth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AuthResult" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Register">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddExponatSoapIn">
+    <wsdl:part name="parameters" element="tns:AddExponat" />
+  </wsdl:message>
+  <wsdl:message name="AddExponatSoapOut">
+    <wsdl:part name="parameters" element="tns:AddExponatResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:AddRoom" />
+  </wsdl:message>
+  <wsdl:message name="AddRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:AddRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddMigratSoapIn">
+    <wsdl:part name="parameters" element="tns:AddMigrat" />
+  </wsdl:message>
+  <wsdl:message name="AddMigratSoapOut">
+    <wsdl:part name="parameters" element="tns:AddMigratResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelExponatSoapIn">
+    <wsdl:part name="parameters" element="tns:DelExponat" />
+  </wsdl:message>
+  <wsdl:message name="DelExponatSoapOut">
+    <wsdl:part name="parameters" element="tns:DelExponatResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:DelRoom" />
+  </wsdl:message>
+  <wsdl:message name="DelRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:DelRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelMigratSoapIn">
+    <wsdl:part name="parameters" element="tns:DelMigrat" />
+  </wsdl:message>
+  <wsdl:message name="DelMigratSoapOut">
+    <wsdl:part name="parameters" element="tns:DelMigratResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExponatsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExponats" />
+  </wsdl:message>
+  <wsdl:message name="GetExponatsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExponatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRoomsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRooms" />
+  </wsdl:message>
+  <wsdl:message name="GetRoomsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRoomsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMigratsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMigrats" />
+  </wsdl:message>
+  <wsdl:message name="GetMigratsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMigratsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AuthSoapIn">
+    <wsdl:part name="parameters" element="tns:Auth" />
+  </wsdl:message>
+  <wsdl:message name="AuthSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterSoapIn">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="RegisterSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="AddExponat">
+      <wsdl:input message="tns:AddExponatSoapIn" />
+      <wsdl:output message="tns:AddExponatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRoom">
+      <wsdl:input message="tns:AddRoomSoapIn" />
+      <wsdl:output message="tns:AddRoomSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMigrat">
+      <wsdl:input message="tns:AddMigratSoapIn" />
+      <wsdl:output message="tns:AddMigratSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelExponat">
+      <wsdl:input message="tns:DelExponatSoapIn" />
+      <wsdl:output message="tns:DelExponatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelRoom">
+      <wsdl:input message="tns:DelRoomSoapIn" />
+      <wsdl:output message="tns:DelRoomSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelMigrat">
+      <wsdl:input message="tns:DelMigratSoapIn" />
+      <wsdl:output message="tns:DelMigratSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExponats">
+      <wsdl:input message="tns:GetExponatsSoapIn" />
+      <wsdl:output message="tns:GetExponatsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRooms">
+      <wsdl:input message="tns:GetRoomsSoapIn" />
+      <wsdl:output message="tns:GetRoomsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMigrats">
+      <wsdl:input message="tns:GetMigratsSoapIn" />
+      <wsdl:output message="tns:GetMigratsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <wsdl:input message="tns:AuthSoapIn" />
+      <wsdl:output message="tns:AuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <wsdl:input message="tns:RegisterSoapIn" />
+      <wsdl:output message="tns:RegisterSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddExponat">
+      <soap:operation soapAction="http://tempuri.org/AddExponat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoom">
+      <soap:operation soapAction="http://tempuri.org/AddRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMigrat">
+      <soap:operation soapAction="http://tempuri.org/AddMigrat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelExponat">
+      <soap:operation soapAction="http://tempuri.org/DelExponat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelRoom">
+      <soap:operation soapAction="http://tempuri.org/DelRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelMigrat">
+      <soap:operation soapAction="http://tempuri.org/DelMigrat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExponats">
+      <soap:operation soapAction="http://tempuri.org/GetExponats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRooms">
+      <soap:operation soapAction="http://tempuri.org/GetRooms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMigrats">
+      <soap:operation soapAction="http://tempuri.org/GetMigrats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <soap:operation soapAction="http://tempuri.org/Auth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://tempuri.org/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddExponat">
+      <soap12:operation soapAction="http://tempuri.org/AddExponat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoom">
+      <soap12:operation soapAction="http://tempuri.org/AddRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMigrat">
+      <soap12:operation soapAction="http://tempuri.org/AddMigrat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelExponat">
+      <soap12:operation soapAction="http://tempuri.org/DelExponat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelRoom">
+      <soap12:operation soapAction="http://tempuri.org/DelRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelMigrat">
+      <soap12:operation soapAction="http://tempuri.org/DelMigrat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExponats">
+      <soap12:operation soapAction="http://tempuri.org/GetExponats" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRooms">
+      <soap12:operation soapAction="http://tempuri.org/GetRooms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMigrats">
+      <soap12:operation soapAction="http://tempuri.org/GetMigrats" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <soap12:operation soapAction="http://tempuri.org/Auth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap12:operation soapAction="http://tempuri.org/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="http://hoodd.somee.com/WebService1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="http://hoodd.somee.com/WebService1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
